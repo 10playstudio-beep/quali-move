@@ -9,38 +9,141 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as LoadingRouteImport } from './routes/loading'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EquipementsIndexRouteImport } from './routes/equipements.index'
+import { Route as EquipementsIdIndexRouteImport } from './routes/equipements.$id.index'
+import { Route as EquipementsIdLevelIdRouteImport } from './routes/equipements.$id.$levelId'
 
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoadingRoute = LoadingRouteImport.update({
+  id: '/loading',
+  path: '/loading',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EquipementsIndexRoute = EquipementsIndexRouteImport.update({
+  id: '/equipements/',
+  path: '/equipements/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipementsIdIndexRoute = EquipementsIdIndexRouteImport.update({
+  id: '/equipements/$id/',
+  path: '/equipements/$id/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipementsIdLevelIdRoute = EquipementsIdLevelIdRouteImport.update({
+  id: '/equipements/$id/$levelId',
+  path: '/equipements/$id/$levelId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/loading': typeof LoadingRoute
+  '/settings': typeof SettingsRoute
+  '/equipements/': typeof EquipementsIndexRoute
+  '/equipements/$id/$levelId': typeof EquipementsIdLevelIdRoute
+  '/equipements/$id/': typeof EquipementsIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/loading': typeof LoadingRoute
+  '/settings': typeof SettingsRoute
+  '/equipements': typeof EquipementsIndexRoute
+  '/equipements/$id/$levelId': typeof EquipementsIdLevelIdRoute
+  '/equipements/$id': typeof EquipementsIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/loading': typeof LoadingRoute
+  '/settings': typeof SettingsRoute
+  '/equipements/': typeof EquipementsIndexRoute
+  '/equipements/$id/$levelId': typeof EquipementsIdLevelIdRoute
+  '/equipements/$id/': typeof EquipementsIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/loading'
+    | '/settings'
+    | '/equipements/'
+    | '/equipements/$id/$levelId'
+    | '/equipements/$id/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/account'
+    | '/loading'
+    | '/settings'
+    | '/equipements'
+    | '/equipements/$id/$levelId'
+    | '/equipements/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/loading'
+    | '/settings'
+    | '/equipements/'
+    | '/equipements/$id/$levelId'
+    | '/equipements/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
+  LoadingRoute: typeof LoadingRoute
+  SettingsRoute: typeof SettingsRoute
+  EquipementsIndexRoute: typeof EquipementsIndexRoute
+  EquipementsIdLevelIdRoute: typeof EquipementsIdLevelIdRoute
+  EquipementsIdIndexRoute: typeof EquipementsIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loading': {
+      id: '/loading'
+      path: '/loading'
+      fullPath: '/loading'
+      preLoaderRoute: typeof LoadingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +151,38 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/equipements/': {
+      id: '/equipements/'
+      path: '/equipements'
+      fullPath: '/equipements/'
+      preLoaderRoute: typeof EquipementsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipements/$id/': {
+      id: '/equipements/$id/'
+      path: '/equipements/$id'
+      fullPath: '/equipements/$id/'
+      preLoaderRoute: typeof EquipementsIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipements/$id/$levelId': {
+      id: '/equipements/$id/$levelId'
+      path: '/equipements/$id/$levelId'
+      fullPath: '/equipements/$id/$levelId'
+      preLoaderRoute: typeof EquipementsIdLevelIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
+  LoadingRoute: LoadingRoute,
+  SettingsRoute: SettingsRoute,
+  EquipementsIndexRoute: EquipementsIndexRoute,
+  EquipementsIdLevelIdRoute: EquipementsIdLevelIdRoute,
+  EquipementsIdIndexRoute: EquipementsIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
