@@ -96,7 +96,7 @@ function Page() {
         <section className="px-5 pt-6">
           <h2 className="text-lg font-bold mb-3">Choisis ton niveau</h2>
           <div className="space-y-3">
-            {equipement.levels.map((lvl) => {
+            {equipement.levels.map((lvl: (typeof equipement.levels)[number]) => {
               const t = tones[lvl.id];
               return (
                 <Link
